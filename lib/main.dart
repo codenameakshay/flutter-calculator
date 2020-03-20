@@ -1,5 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
 
 void main() => runApp(Android2());
@@ -11,18 +13,62 @@ class Android2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        fontFamily: 'IBM Plex Sans',
         accentColor: Colors.deepOrangeAccent,
       ),
       home: Scaffold(
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Image.network(
+                  'https://avatars2.githubusercontent.com/u/60510869?s=460&u=ea7872a9aa9189cfc2b0910a51e4b83d458709a3&v=4',
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.cyan[200],
+                ),
+              ),
+              ListTile(
+                title: Center(
+                  child: Text('CodeNameAKshay'),
+                ),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(),
+              ListTile(
+                leading: Icon(Icons.open_in_browser),
+                title: new InkWell(
+                    child: Text('Visit my website!'),
+                    onTap: () {
+                      launch('http://codenameakshay.tech');
+                      Navigator.pop(context);
+                    }),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        ),
         appBar: AppBar(
+          iconTheme: new IconThemeData(color: _ColorCatalog.instance.color_4),
           title: Center(
-            child: Text(
-              'Flutter_Calc',
-              style: TextStyle(
-                fontFamily: 'IBM Plex Sans',
-                color: _ColorCatalog.instance.color_4,
-                fontSize: 24.0000000000,
-                fontWeight: FontWeight.bold,
+            child: Padding(
+              padding: EdgeInsets.only(
+                right: 45.0,
+              ),
+              child: Text(
+                'Flutter_Calc',
+                style: TextStyle(
+                  fontFamily: 'IBM Plex Sans',
+                  color: _ColorCatalog.instance.color_4,
+                  fontSize: 24.0000000000,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
@@ -44,7 +90,8 @@ class Android2 extends StatelessWidget {
                         readOnly: true,
                         decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Enter the expression you want to calculate'),
+                            hintText:
+                                'Enter the expression you want to calculate'),
                       ),
                     ),
                   ),
@@ -56,13 +103,371 @@ class Android2 extends StatelessWidget {
               child: Container(
                 child: Center(
                   child: CustomPaint(
-                    foregroundPainter: new Android2Painter(),
-                    child: Container(),
+                    painter: new Android2Painter(),
+                    child: Container(
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 28.0,
+                                      right: 10.0,
+                                      left: 29.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 28.0,
+                                      right: 10.0,
+                                      left: 10.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 28.0,
+                                      right: 10.0,
+                                      left: 11.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 28.0,
+                                      right: 10.0,
+                                      left: 10.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 26.0,
+                                      right: 10.0,
+                                      left: 29.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 26.0,
+                                      right: 10.0,
+                                      left: 10.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 26.0,
+                                      right: 10.0,
+                                      left: 11.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 26.0,
+                                      right: 10.0,
+                                      left: 10.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 26.0,
+                                      right: 10.0,
+                                      left: 29.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 26.0,
+                                      right: 10.0,
+                                      left: 10.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 26.0,
+                                      right: 10.0,
+                                      left: 11.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 26.0,
+                                      right: 10.0,
+                                      left: 10.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 26.0,
+                                      right: 10.0,
+                                      left: 29.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 26.0,
+                                      right: 10.0,
+                                      left: 10.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 26.0,
+                                      right: 10.0,
+                                      left: 11.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 26.0,
+                                      right: 10.0,
+                                      left: 10.0,
+                                      bottom: 10.0,
+                                    ),
+                                    child: ButtonTheme(
+                                      buttonColor:
+                                          _ColorCatalog.instance.color_1,
+                                      minWidth: 68.0,
+                                      height: 59.0,
+                                      child: RaisedButton(onPressed: () {}),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
           ],
+          // Expanded(
+          //   flex: 2,
+          //   child: Container(
+          //     child: Center(
+          //       child: CustomPaint(
+          //         foregroundPainter: new Android2Painter(),
+          //         child: Container(),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // Expanded(
+          //   flex: 2,
+          //   child: Container(
+          //     child: Center(
+          //       child: CustomPaint(
+          //         foregroundPainter: new Android2Painter(),
+          //         child: Container(),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // Expanded(
+          //   flex: 2,
+          //   child: Container(
+          //     child: Center(
+          //       child: CustomPaint(
+          //         foregroundPainter: new Android2Painter(),
+          //         child: Container(),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ),
       ),
     );
@@ -107,7 +512,6 @@ class AndroidPainter extends CustomPainter {
       ]));
       canvas.drawRect(Offset.zero & frame.size,
           (Paint()..color = _ColorCatalog.instance.color_0));
-
 
 // 9:5 : Rectangle 28 (RECTANGLE)
       var draw_9_5 = (Canvas canvas, Rect container) {
@@ -2841,6 +3245,753 @@ class Android2Painter extends CustomPainter {
   }
 }
 
+// class Android3Painter extends CustomPainter {
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     canvas.drawColor(Colors.transparent, BlendMode.screen);
+//     var frame = Offset.zero & size;
+//     canvas.translate(-760.0000000000, 43.0000000000);
+
+// // 16:124 : Android3Painter (COMPONENT)
+//     var draw_16_124 = (Canvas canvas, Rect container) {
+//       var frame = Rect.fromLTWH(
+//           757.0000000000,
+//           -33.0000000000,
+//           (container.width - (0.0)),
+//           (container.height -
+//               (0.0))) /* H:LEFT_RIGHT V:TOP_BOTTOM F:(l:757,t:-33,r:-757,b:-757,w:360,h:98) */;
+//       canvas.save();
+//       canvas.transform(Float64List.fromList([
+//         1.0000000000,
+//         0.0,
+//         0.0,
+//         0.0,
+//         0.0,
+//         1.0000000000,
+//         0.0,
+//         0.0,
+//         0.0,
+//         0.0,
+//         1.0,
+//         0.0,
+//         frame.left,
+//         frame.top,
+//         0.0,
+//         1.0
+//       ]));
+//       canvas.drawRect(Offset.zero & frame.size,
+//           (Paint()..color = _ColorCatalog.instance.color_1));
+
+// // 16:2 : Rectangle 30 (RECTANGLE)
+//       var draw_16_2 = (Canvas canvas, Rect container) {
+//         var frame = Rect.fromLTWH(0.0, 0.0, 360.0000000000,
+//             109.0000000000) /* H:SCALE V:SCALE F:(l:0,t:0,r:0,b:0,w:360,h:109) */;
+//         canvas.save();
+//         canvas.scale((container.width) / 360.0000000000,
+//             (container.height) / 98.0000000000);
+//         canvas.transform(Float64List.fromList([
+//           1.0000000000,
+//           0.0,
+//           0.0,
+//           0.0,
+//           0.0,
+//           1.0000000000,
+//           0.0,
+//           0.0,
+//           0.0,
+//           0.0,
+//           1.0,
+//           0.0,
+//           frame.left,
+//           frame.top,
+//           0.0,
+//           1.0
+//         ]));
+//         var transform = Float64List.fromList([
+//           (frame.width / 360.0000000000),
+//           0.0,
+//           0.0,
+//           0.0,
+//           0.0,
+//           (frame.height / 109.0000000000),
+//           0.0,
+//           0.0,
+//           0.0,
+//           0.0,
+//           1.0,
+//           0.0,
+//           0.0,
+//           0.0,
+//           0.0,
+//           1.0
+//         ]);
+//         var fillGeometry = [
+//           (Path()..addRect(Rect.fromLTWH(0.0, 0.0, frame.width, frame.height)))
+//         ];
+//         fillGeometry.forEach((path) {
+//           canvas.drawPath(path, _PaintCatalog.instance.paint_1);
+//         });
+//         canvas.restore();
+//       };
+//       draw_16_2(canvas, frame);
+
+// // 9:192 : Row1 (INSTANCE)
+//       var draw_9_192 = (Canvas canvas, Rect container) {
+//         var frame = Rect.fromLTWH(14.0000000000, 10.0000000000, 332.0000000000,
+//             77.0000000000) /* H:SCALE V:SCALE F:(l:14,t:10,r:14,b:14,w:332,h:77) */;
+//         canvas.save();
+//         canvas.scale((container.width) / 360.0000000000,
+//             (container.height) / 98.0000000000);
+//         canvas.transform(Float64List.fromList([
+//           1.0000000000,
+//           0.0,
+//           0.0,
+//           0.0,
+//           0.0,
+//           1.0000000000,
+//           0.0,
+//           0.0,
+//           0.0,
+//           0.0,
+//           1.0,
+//           0.0,
+//           frame.left,
+//           frame.top,
+//           0.0,
+//           1.0
+//         ]));
+//         canvas.drawRect(Offset.zero & frame.size,
+//             (Paint()..color = _ColorCatalog.instance.color_1));
+
+// // I9:192;9:7 : Rectangle 9 (RECTANGLE)
+//         var draw_I9_192__9_7 = (Canvas canvas, Rect container) {
+//           var frame = Rect.fromLTWH(0.0, 0.0, 332.0000000000,
+//               77.0000000000) /* H:SCALE V:SCALE F:(l:0,t:0,r:0,b:0,w:332,h:77) */;
+//           canvas.save();
+//           canvas.scale((container.width) / 332.0000000000,
+//               (container.height) / 77.0000000000);
+//           canvas.transform(Float64List.fromList([
+//             1.0000000000,
+//             0.0,
+//             0.0,
+//             0.0,
+//             0.0,
+//             1.0000000000,
+//             0.0,
+//             0.0,
+//             0.0,
+//             0.0,
+//             1.0,
+//             0.0,
+//             frame.left,
+//             frame.top,
+//             0.0,
+//             1.0
+//           ]));
+//           var transform = Float64List.fromList([
+//             (frame.width / 332.0000000000),
+//             0.0,
+//             0.0,
+//             0.0,
+//             0.0,
+//             (frame.height / 77.0000000000),
+//             0.0,
+//             0.0,
+//             0.0,
+//             0.0,
+//             1.0,
+//             0.0,
+//             0.0,
+//             0.0,
+//             0.0,
+//             1.0
+//           ]);
+//           var fillGeometry = [
+//             Path()
+//               ..addRRect(RRect.fromRectAndRadius(
+//                   Rect.fromLTWH(0.0, 0.0, frame.width, frame.height),
+//                   Radius.circular(15)))
+//           ];
+//           fillGeometry.forEach((path) {
+//             canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+//           });
+//           canvas.restore();
+//         };
+//         draw_I9_192__9_7(canvas, frame);
+
+// // I9:192;9:137 : Button/7 (INSTANCE)
+//         var draw_I9_192__9_137 = (Canvas canvas, Rect container) {
+//           var frame = Rect.fromLTWH(91.0000000000, 9.0000000000, 68.0000000000,
+//               59.0000000000) /* H:SCALE V:SCALE F:(l:91,t:9,r:173,b:173,w:68,h:59) */;
+//           canvas.save();
+//           canvas.scale((container.width) / 332.0000000000,
+//               (container.height) / 77.0000000000);
+//           canvas.transform(Float64List.fromList([
+//             1.0000000000,
+//             0.0,
+//             0.0,
+//             0.0,
+//             0.0,
+//             1.0000000000,
+//             0.0,
+//             0.0,
+//             0.0,
+//             0.0,
+//             1.0,
+//             0.0,
+//             frame.left,
+//             frame.top,
+//             0.0,
+//             1.0
+//           ]));
+//           canvas.drawRect(Offset.zero & frame.size,
+//               (Paint()..color = _ColorCatalog.instance.color_1));
+
+// // I9:192;9:137;9:74 : Rectangle 25 (RECTANGLE)
+//           var draw_I9_192__9_137__9_74 = (Canvas canvas, Rect container) {
+//             var frame = Rect.fromLTWH(0.0, 0.0, 68.0000000000,
+//                 59.0000000000) /* H:SCALE V:SCALE F:(l:0,t:0,r:0,b:0,w:68,h:59) */;
+//             canvas.save();
+//             canvas.scale((container.width) / 68.0000000000,
+//                 (container.height) / 59.0000000000);
+//             canvas.transform(Float64List.fromList([
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0,
+//               0.0,
+//               frame.left,
+//               frame.top,
+//               0.0,
+//               1.0
+//             ]));
+//             var transform = Float64List.fromList([
+//               (frame.width / 68.0000000000),
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               (frame.height / 59.0000000000),
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0
+//             ]);
+//             var fillGeometry = [
+//               Path()
+//                 ..addRRect(RRect.fromRectAndRadius(
+//                     Rect.fromLTWH(0.0, 0.0, frame.width, frame.height),
+//                     Radius.circular(10)))
+//             ];
+//             fillGeometry.forEach((path) {
+//               canvas.drawPath(path, _PaintCatalog.instance.paint_0);
+//             });
+//             canvas.restore();
+//           };
+//           draw_I9_192__9_137__9_74(canvas, frame);
+
+// // I9:192;9:137;9:85 : 8 (TEXT)
+//           var draw_I9_192__9_137__9_85 = (Canvas canvas, Rect container) {
+//             var frame = Rect.fromLTWH(
+//                 25.3559322357,
+//                 14.0000000000,
+//                 17.2881374359,
+//                 31.0000000000) /* H:SCALE V:SCALE F:(l:25.355932235717773,t:14,r:25.35593032836914,b:25.35593032836914,w:17.288137435913086,h:31) */;
+//             canvas.save();
+//             canvas.scale((container.width) / 68.0000000000,
+//                 (container.height) / 59.0000000000);
+//             canvas.transform(Float64List.fromList([
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0,
+//               0.0,
+//               frame.left,
+//               frame.top,
+//               0.0,
+//               1.0
+//             ]));
+//             var style_0 = _TextStyleCatalog.instance.ui_TextStyle_0;
+//             var paragraphStyle = ui.ParagraphStyle(
+//               fontFamily: 'IBM Plex Sans',
+//               textAlign: TextAlign.center,
+//               fontSize: 24.0000000000,
+//               fontWeight: FontWeight.w600,
+//             );
+//             var paragraphBuilder = ui.ParagraphBuilder(paragraphStyle)
+//               ..pushStyle(style_0);
+//             paragraphBuilder.addText("8");
+//             var paragraph = paragraphBuilder.build();
+//             paragraph.layout(new ui.ParagraphConstraints(width: frame.width));
+//             canvas.drawParagraph(paragraph, Offset.zero);
+//             canvas.restore();
+//           };
+//           draw_I9_192__9_137__9_85(canvas, frame);
+//           canvas.restore();
+//         };
+//         draw_I9_192__9_137(canvas, frame);
+
+// // I9:192;9:138 : Button/7 (INSTANCE)
+//         var draw_I9_192__9_138 = (Canvas canvas, Rect container) {
+//           var frame = Rect.fromLTWH(172.0000000000, 9.0000000000, 68.0000000000,
+//               59.0000000000) /* H:SCALE V:SCALE F:(l:172,t:9,r:92,b:92,w:68,h:59) */;
+//           canvas.save();
+//           canvas.scale((container.width) / 332.0000000000,
+//               (container.height) / 77.0000000000);
+//           canvas.transform(Float64List.fromList([
+//             1.0000000000,
+//             0.0,
+//             0.0,
+//             0.0,
+//             0.0,
+//             1.0000000000,
+//             0.0,
+//             0.0,
+//             0.0,
+//             0.0,
+//             1.0,
+//             0.0,
+//             frame.left,
+//             frame.top,
+//             0.0,
+//             1.0
+//           ]));
+//           canvas.drawRect(Offset.zero & frame.size,
+//               (Paint()..color = _ColorCatalog.instance.color_1));
+
+// // I9:192;9:138;9:74 : Rectangle 25 (RECTANGLE)
+//           var draw_I9_192__9_138__9_74 = (Canvas canvas, Rect container) {
+//             var frame = Rect.fromLTWH(0.0, 0.0, 68.0000000000,
+//                 59.0000000000) /* H:SCALE V:SCALE F:(l:0,t:0,r:0,b:0,w:68,h:59) */;
+//             canvas.save();
+//             canvas.scale((container.width) / 68.0000000000,
+//                 (container.height) / 59.0000000000);
+//             canvas.transform(Float64List.fromList([
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0,
+//               0.0,
+//               frame.left,
+//               frame.top,
+//               0.0,
+//               1.0
+//             ]));
+//             var transform = Float64List.fromList([
+//               (frame.width / 68.0000000000),
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               (frame.height / 59.0000000000),
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0
+//             ]);
+//             var fillGeometry = [
+//               Path()
+//                 ..addRRect(RRect.fromRectAndRadius(
+//                     Rect.fromLTWH(0.0, 0.0, frame.width, frame.height),
+//                     Radius.circular(10)))
+//             ];
+//             fillGeometry.forEach((path) {
+//               canvas.drawPath(path, _PaintCatalog.instance.paint_0);
+//             });
+//             canvas.restore();
+//           };
+//           draw_I9_192__9_138__9_74(canvas, frame);
+
+// // I9:192;9:138;9:85 : 9 (TEXT)
+//           var draw_I9_192__9_138__9_85 = (Canvas canvas, Rect container) {
+//             var frame = Rect.fromLTWH(
+//                 25.3559322357,
+//                 14.0000000000,
+//                 17.2881374359,
+//                 31.0000000000) /* H:SCALE V:SCALE F:(l:25.355932235717773,t:14,r:25.35593032836914,b:25.35593032836914,w:17.288137435913086,h:31) */;
+//             canvas.save();
+//             canvas.scale((container.width) / 68.0000000000,
+//                 (container.height) / 59.0000000000);
+//             canvas.transform(Float64List.fromList([
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0,
+//               0.0,
+//               frame.left,
+//               frame.top,
+//               0.0,
+//               1.0
+//             ]));
+//             var style_0 = _TextStyleCatalog.instance.ui_TextStyle_0;
+//             var paragraphStyle = ui.ParagraphStyle(
+//               fontFamily: 'IBM Plex Sans',
+//               textAlign: TextAlign.center,
+//               fontSize: 24.0000000000,
+//               fontWeight: FontWeight.w600,
+//             );
+//             var paragraphBuilder = ui.ParagraphBuilder(paragraphStyle)
+//               ..pushStyle(style_0);
+//             paragraphBuilder.addText("9");
+//             var paragraph = paragraphBuilder.build();
+//             paragraph.layout(new ui.ParagraphConstraints(width: frame.width));
+//             canvas.drawParagraph(paragraph, Offset.zero);
+//             canvas.restore();
+//           };
+//           draw_I9_192__9_138__9_85(canvas, frame);
+//           canvas.restore();
+//         };
+//         draw_I9_192__9_138(canvas, frame);
+
+// // I9:192;9:139 : Button/7 (INSTANCE)
+//         var draw_I9_192__9_139 = (Canvas canvas, Rect container) {
+//           var frame = Rect.fromLTWH(253.0000000000, 9.0000000000, 68.0000000000,
+//               59.0000000000) /* H:LEFT V:TOP F:(l:253,t:9,r:11,b:11,w:68,h:59) */;
+//           canvas.save();
+//           canvas.transform(Float64List.fromList([
+//             1.0000000000,
+//             0.0,
+//             0.0,
+//             0.0,
+//             0.0,
+//             1.0000000000,
+//             0.0,
+//             0.0,
+//             0.0,
+//             0.0,
+//             1.0,
+//             0.0,
+//             frame.left,
+//             frame.top,
+//             0.0,
+//             1.0
+//           ]));
+//           canvas.drawRect(Offset.zero & frame.size,
+//               (Paint()..color = _ColorCatalog.instance.color_1));
+
+// // I9:192;9:139;9:74 : Rectangle 25 (RECTANGLE)
+//           var draw_I9_192__9_139__9_74 = (Canvas canvas, Rect container) {
+//             var frame = Rect.fromLTWH(0.0, 0.0, 68.0000000000,
+//                 59.0000000000) /* H:SCALE V:SCALE F:(l:0,t:0,r:0,b:0,w:68,h:59) */;
+//             canvas.save();
+//             canvas.scale((container.width) / 68.0000000000,
+//                 (container.height) / 59.0000000000);
+//             canvas.transform(Float64List.fromList([
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0,
+//               0.0,
+//               frame.left,
+//               frame.top,
+//               0.0,
+//               1.0
+//             ]));
+//             var transform = Float64List.fromList([
+//               (frame.width / 68.0000000000),
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               (frame.height / 59.0000000000),
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0
+//             ]);
+//             var fillGeometry = [
+//               Path()
+//                 ..addRRect(RRect.fromRectAndRadius(
+//                     Rect.fromLTWH(0.0, 0.0, frame.width, frame.height),
+//                     Radius.circular(10)))
+//             ];
+//             fillGeometry.forEach((path) {
+//               canvas.drawPath(path, _PaintCatalog.instance.paint_0);
+//             });
+//             canvas.restore();
+//           };
+//           draw_I9_192__9_139__9_74(canvas, frame);
+
+// // I9:192;9:139;9:85 : + (TEXT)
+//           var draw_I9_192__9_139__9_85 = (Canvas canvas, Rect container) {
+//             var frame = Rect.fromLTWH(
+//                 25.3559322357,
+//                 14.0000000000,
+//                 17.2881374359,
+//                 31.0000000000) /* H:SCALE V:SCALE F:(l:25.355932235717773,t:14,r:25.35593032836914,b:25.35593032836914,w:17.288137435913086,h:31) */;
+//             canvas.save();
+//             canvas.scale((container.width) / 68.0000000000,
+//                 (container.height) / 59.0000000000);
+//             canvas.transform(Float64List.fromList([
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0,
+//               0.0,
+//               frame.left,
+//               frame.top,
+//               0.0,
+//               1.0
+//             ]));
+//             var style_0 = _TextStyleCatalog.instance.ui_TextStyle_0;
+//             var paragraphStyle = ui.ParagraphStyle(
+//               fontFamily: 'IBM Plex Sans',
+//               textAlign: TextAlign.center,
+//               fontSize: 24.0000000000,
+//               fontWeight: FontWeight.w600,
+//             );
+//             var paragraphBuilder = ui.ParagraphBuilder(paragraphStyle)
+//               ..pushStyle(style_0);
+//             paragraphBuilder.addText("+");
+//             var paragraph = paragraphBuilder.build();
+//             paragraph.layout(new ui.ParagraphConstraints(width: frame.width));
+//             canvas.drawParagraph(paragraph, Offset.zero);
+//             canvas.restore();
+//           };
+//           draw_I9_192__9_139__9_85(canvas, frame);
+//           canvas.restore();
+//         };
+//         draw_I9_192__9_139(canvas, frame);
+
+// // I9:192;9:140 : Button/7 (INSTANCE)
+//         var draw_I9_192__9_140 = (Canvas canvas, Rect container) {
+//           var frame = Rect.fromLTWH(10.0000000000, 9.0000000000, 68.0000000000,
+//               59.0000000000) /* H:LEFT V:TOP F:(l:10,t:9,r:254,b:254,w:68,h:59) */;
+//           canvas.save();
+//           canvas.transform(Float64List.fromList([
+//             1.0000000000,
+//             0.0,
+//             0.0,
+//             0.0,
+//             0.0,
+//             1.0000000000,
+//             0.0,
+//             0.0,
+//             0.0,
+//             0.0,
+//             1.0,
+//             0.0,
+//             frame.left,
+//             frame.top,
+//             0.0,
+//             1.0
+//           ]));
+//           canvas.drawRect(Offset.zero & frame.size,
+//               (Paint()..color = _ColorCatalog.instance.color_1));
+
+// // I9:192;9:140;9:74 : Rectangle 25 (RECTANGLE)
+//           var draw_I9_192__9_140__9_74 = (Canvas canvas, Rect container) {
+//             var frame = Rect.fromLTWH(0.0, 0.0, 68.0000000000,
+//                 59.0000000000) /* H:SCALE V:SCALE F:(l:0,t:0,r:0,b:0,w:68,h:59) */;
+//             canvas.save();
+//             canvas.scale((container.width) / 68.0000000000,
+//                 (container.height) / 59.0000000000);
+//             canvas.transform(Float64List.fromList([
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0,
+//               0.0,
+//               frame.left,
+//               frame.top,
+//               0.0,
+//               1.0
+//             ]));
+//             var transform = Float64List.fromList([
+//               (frame.width / 68.0000000000),
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               (frame.height / 59.0000000000),
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0
+//             ]);
+//             var fillGeometry = [
+//               Path()
+//                 ..addRRect(RRect.fromRectAndRadius(
+//                     Rect.fromLTWH(0.0, 0.0, frame.width, frame.height),
+//                     Radius.circular(10)))
+//             ];
+//             fillGeometry.forEach((path) {
+//               canvas.drawPath(path, _PaintCatalog.instance.paint_0);
+//             });
+//             canvas.restore();
+//           };
+//           draw_I9_192__9_140__9_74(canvas, frame);
+
+// // I9:192;9:140;9:85 : 7 (TEXT)
+//           var draw_I9_192__9_140__9_85 = (Canvas canvas, Rect container) {
+//             var frame = Rect.fromLTWH(
+//                 25.3559322357,
+//                 14.0000000000,
+//                 17.2881374359,
+//                 31.0000000000) /* H:SCALE V:SCALE F:(l:25.355932235717773,t:14,r:25.35593032836914,b:25.35593032836914,w:17.288137435913086,h:31) */;
+//             canvas.save();
+//             canvas.scale((container.width) / 68.0000000000,
+//                 (container.height) / 59.0000000000);
+//             canvas.transform(Float64List.fromList([
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0000000000,
+//               0.0,
+//               0.0,
+//               0.0,
+//               0.0,
+//               1.0,
+//               0.0,
+//               frame.left,
+//               frame.top,
+//               0.0,
+//               1.0
+//             ]));
+//             var style_0 = _TextStyleCatalog.instance.ui_TextStyle_0;
+//             var paragraphStyle = ui.ParagraphStyle(
+//               fontFamily: 'IBM Plex Sans',
+//               textAlign: TextAlign.center,
+//               fontSize: 24.0000000000,
+//               fontWeight: FontWeight.w600,
+//             );
+//             var paragraphBuilder = ui.ParagraphBuilder(paragraphStyle)
+//               ..pushStyle(style_0);
+//             paragraphBuilder.addText("7");
+//             var paragraph = paragraphBuilder.build();
+//             paragraph.layout(new ui.ParagraphConstraints(width: frame.width));
+//             canvas.drawParagraph(paragraph, Offset.zero);
+//             canvas.restore();
+//           };
+//           draw_I9_192__9_140__9_85(canvas, frame);
+//           canvas.restore();
+//         };
+//         draw_I9_192__9_140(canvas, frame);
+//         canvas.restore();
+//       };
+//       draw_9_192(canvas, frame);
+//       canvas.restore();
+//     };
+//     draw_16_124(canvas, frame);
+//   }
+
+//   @override
+//   SemanticsBuilderCallback get semanticsBuilder {
+//     return (Size size) => [];
+//   }
+
+//   @override
+//   bool shouldRebuildSemantics(Android3Painter oldDelegate) {
+//     return shouldRepaint(oldDelegate);
+//   }
+
+//   @override
+//   bool shouldRepaint(Android3Painter oldDelegate) {
+//     return false;
+//   }
+// }
+
+// class Android4Painter extends CustomPainter {
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     canvas.drawColor(Colors.transparent, BlendMode.screen);
+//     var frame = Offset.zero & size;
+//     canvas.translate(-277.0000000000, 33.0000000000);
+//   }
+//   @override
+//   bool shouldRepaint(Android3Painter oldDelegate) {
+//     return false;
+//   }
+// }
+
+// class Android5Painter extends CustomPainter {
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     canvas.drawColor(Colors.transparent, BlendMode.screen);
+//     var frame = Offset.zero & size;
+//     canvas.translate(-277.0000000000, 33.0000000000);
+//   }
+//   @override
+//   bool shouldRepaint(Android3Painter oldDelegate) {
+//     return false;
+//   }
+// }
+
 class _PathCatalog {
   _PathCatalog() {}
 
@@ -2851,11 +4002,14 @@ class _PaintCatalog {
   _PaintCatalog() {
     this.paint_0 = (Paint()..color = _ColorCatalog.instance.color_2);
     this.paint_1 = (Paint()..color = _ColorCatalog.instance.color_3);
+    this.paint_2 = (Paint()..color = _ColorCatalog.instance.color_0);
   }
 
   Paint paint_0;
 
   Paint paint_1;
+//0-0 1-2 2-3      0-2 1-3 2-0    2>0  0>1  1>2
+  Paint paint_2;
 
   static final _PaintCatalog instance = _PaintCatalog();
 }
