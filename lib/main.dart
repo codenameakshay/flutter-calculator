@@ -4,18 +4,69 @@ import 'dart:ui' as ui;
 
 void main() => runApp(Android2());
 
-
 class Android2 extends StatelessWidget {
   Android2();
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(painter: Android2Painter());
+    return MaterialApp(
+      theme: ThemeData(
+        //brightness: Brightness.dark,
+        accentColor: Colors.deepOrangeAccent,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Center(
+            child: Text(
+              'Flutter_Calc',
+              style: TextStyle(
+                fontFamily: 'IBM Plex Sans',
+                color: _ColorCatalog.instance.color_4,
+                fontSize: 24.0000000000,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          backgroundColor: Colors.cyanAccent[200],
+        ),
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                child: Center(
+                  child: CustomPaint(
+                    foregroundPainter: new AndroidPainter(),
+                    child: Container(),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Center(
+                  child: CustomPaint(
+                    foregroundPainter: new Android2Painter(),
+                    child: Container(),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        //  Padding(
+        //   padding: EdgeInsets.all(8.0),
+        //   child: CustomPaint(
+        //     painter: Android2Painter(),
+        //   ),
+        // ),
+        // ),
+      ),
+    );
   }
 }
 
-class Android2Painter extends CustomPainter {
-  Android2Painter();
+class AndroidPainter extends CustomPainter {
+  AndroidPainter();
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -23,14 +74,14 @@ class Android2Painter extends CustomPainter {
     var frame = Offset.zero & size;
     canvas.translate(-277.0000000000, 320.0000000000);
 
-// 9:197 : Android - 2 (COMPONENT)
-    var draw_9_197 = (Canvas canvas, Rect container) {
+// 9:6 : Android (COMPONENT)
+    var draw_9_6 = (Canvas canvas, Rect container) {
       var frame = Rect.fromLTWH(
           277.0000000000,
           -320.0000000000,
           (container.width - (0.0)),
           (container.height -
-              (0.0))) /* H:LEFT_RIGHT V:TOP_BOTTOM F:(l:277,t:-320,r:-277,b:-277,w:360,h:640) */;
+              (0.0))) /* H:LEFT_RIGHT V:TOP_BOTTOM F:(l:291,t:-320,r:-291,b:-291,w:332,h:258) */;
       canvas.save();
       canvas.transform(Float64List.fromList([
         1.0000000000,
@@ -53,13 +104,16 @@ class Android2Painter extends CustomPainter {
       canvas.drawRect(Offset.zero & frame.size,
           (Paint()..color = _ColorCatalog.instance.color_0));
 
-// 9:191 : Header (INSTANCE)
-      var draw_9_191 = (Canvas canvas, Rect container) {
-        var frame = Rect.fromLTWH(14.0000000000, 29.0000000000, 332.0000000000,
-            258.0000000000) /* H:SCALE V:SCALE F:(l:14,t:29,r:14,b:14,w:332,h:258) */;
+// 15:0 : Rectangle 29 (RECTANGLE)
+     
+
+// 9:5 : Rectangle 28 (RECTANGLE)
+      var draw_9_5 = (Canvas canvas, Rect container) {
+        var frame = Rect.fromLTWH(10.0, 10.0000000000, 340.0000000000,
+            244.0000000000) /* H:SCALE V:SCALE F:(l:0,t:-18,r:0,b:0,w:332,h:278) */;
         canvas.save();
         canvas.scale((container.width) / 360.0000000000,
-            (container.height) / 640.0000000000);
+            (container.height) / 258.0000000000);
         canvas.transform(Float64List.fromList([
           1.0000000000,
           0.0,
@@ -78,174 +132,103 @@ class Android2Painter extends CustomPainter {
           0.0,
           1.0
         ]));
-        canvas.drawRect(Offset.zero & frame.size,
-            (Paint()..color = _ColorCatalog.instance.color_1));
-
-// I9:191;9:3 : Rectangle 27 (RECTANGLE)
-        var draw_I9_191__9_3 = (Canvas canvas, Rect container) {
-          var frame = Rect.fromLTWH(0.0, 0.0, 332.0000000000,
-              68.3507461548) /* H:SCALE V:SCALE F:(l:0,t:0,r:0,b:0,w:332,h:68.35074615478516) */;
-          canvas.save();
-          canvas.scale((container.width) / 332.0000000000,
-              (container.height) / 258.0000000000);
-          canvas.transform(Float64List.fromList([
-            1.0000000000,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0000000000,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0,
-            0.0,
-            frame.left,
-            frame.top,
-            0.0,
-            1.0
-          ]));
-          var transform = Float64List.fromList([
-            (frame.width / 332.0000000000),
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            (frame.height / 68.3507461548),
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0
-          ]);
-          var fillGeometry = [
-            (Path()
-              ..addRect(Rect.fromLTWH(0.0, 0.0, frame.width, frame.height)))
-          ];
-          fillGeometry.forEach((path) {
-            canvas.drawPath(path, _PaintCatalog.instance.paint_0);
-          });
-          canvas.restore();
-        };
-        draw_I9_191__9_3(canvas, frame);
-
-// I9:191;9:4 : Flutter_Calc (TEXT)
-        var draw_I9_191__9_4 = (Canvas canvas, Rect container) {
-          var frame = Rect.fromLTWH(
-              53.0000000000,
-              18.0000000000,
-              225.0000000000,
-              32.0000000000) /* H:SCALE V:SCALE F:(l:53,t:18,r:54,b:54,w:225,h:32) */;
-          canvas.save();
-          canvas.scale((container.width) / 332.0000000000,
-              (container.height) / 258.0000000000);
-          canvas.transform(Float64List.fromList([
-            1.0000000000,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0000000000,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0,
-            0.0,
-            frame.left,
-            frame.top,
-            0.0,
-            1.0
-          ]));
-          var style_0 = _TextStyleCatalog.instance.ui_TextStyle_0;
-          var paragraphStyle = ui.ParagraphStyle(
-            fontFamily: 'IBM Plex Sans',
-            textAlign: TextAlign.center,
-            fontSize: 24.0000000000,
-            fontWeight: FontWeight.w600,
-          );
-          var paragraphBuilder = ui.ParagraphBuilder(paragraphStyle)
-            ..pushStyle(style_0);
-          paragraphBuilder.addText("Flutter_Calc");
-          var paragraph = paragraphBuilder.build();
-          paragraph.layout(new ui.ParagraphConstraints(width: frame.width));
-          canvas.drawParagraph(paragraph, Offset.zero);
-          canvas.restore();
-        };
-        draw_I9_191__9_4(canvas, frame);
-
-// I9:191;9:5 : Rectangle 28 (RECTANGLE)
-        var draw_I9_191__9_5 = (Canvas canvas, Rect container) {
-          var frame = Rect.fromLTWH(0.0, 77.0000000000, 332.0000000000,
-              186.0000000000) /* H:SCALE V:SCALE F:(l:0,t:77,r:0,b:0,w:332,h:186) */;
-          canvas.save();
-          canvas.scale((container.width) / 332.0000000000,
-              (container.height) / 258.0000000000);
-          canvas.transform(Float64List.fromList([
-            1.0000000000,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0000000000,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0,
-            0.0,
-            frame.left,
-            frame.top,
-            0.0,
-            1.0
-          ]));
-          var transform = Float64List.fromList([
-            (frame.width / 332.0000000000),
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            (frame.height / 186.0000000000),
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0
-          ]);
-          var fillGeometry = [
-            Path()
-              ..addRRect(RRect.fromRectAndRadius(
-                  Rect.fromLTWH(0.0, 0.0, frame.width, frame.height),
-                  Radius.circular(15)))
-          ];
-          fillGeometry.forEach((path) {
-            canvas.drawPath(path, _PaintCatalog.instance.paint_1);
-          });
-          canvas.restore();
-        };
-        draw_I9_191__9_5(canvas, frame);
+        var transform = Float64List.fromList([
+          (frame.width / 332.0000000000),
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          (frame.height / 278.0000000000),
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]);
+        var fillGeometry = [
+          Path()
+            ..addRRect(RRect.fromRectAndRadius(
+                Rect.fromLTWH(0.0, 0.0, frame.width, frame.height),
+                Radius.circular(15)))
+        ];
+        fillGeometry.forEach((path) {
+          canvas.drawPath(path, _PaintCatalog.instance.paint_0);
+        });
         canvas.restore();
       };
-      draw_9_191(canvas, frame);
+      draw_9_5(canvas, frame);
+      canvas.restore();
+    };
+    draw_9_6(canvas, frame);
+  }
+
+  @override
+  SemanticsBuilderCallback get semanticsBuilder {
+    return (Size size) => [];
+  }
+
+  @override
+  bool shouldRebuildSemantics(AndroidPainter oldDelegate) {
+    return shouldRepaint(oldDelegate);
+  }
+
+  @override
+  bool shouldRepaint(AndroidPainter oldDelegate) {
+    return false;
+  }
+}
+
+class Android2Painter extends CustomPainter {
+  Android2Painter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.drawColor(Colors.transparent, BlendMode.screen);
+    var frame = Offset.zero & size;
+    canvas.translate(-277.0000000000, 33.0000000000);
+
+// 9:197 : Android - 2 (COMPONENT)
+    var draw_9_197 = (Canvas canvas, Rect container) {
+      var frame = Rect.fromLTWH(
+          277.0000000000,
+          -33.0000000000,
+          (container.width - (0.0)),
+          (container.height -
+              (0.0))) /* H:LEFT_RIGHT V:TOP_BOTTOM F:(l:277,t:-33,r:-277,b:-277,w:360,h:353) */;
+      canvas.save();
+      canvas.transform(Float64List.fromList([
+        1.0000000000,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0000000000,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        frame.left,
+        frame.top,
+        0.0,
+        1.0
+      ]));
+      canvas.drawRect(Offset.zero & frame.size,
+          (Paint()..color = _ColorCatalog.instance.color_0));
 
 // 9:192 : Row1 (INSTANCE)
       var draw_9_192 = (Canvas canvas, Rect container) {
-        var frame = Rect.fromLTWH(14.0000000000, 300.0000000000, 332.0000000000,
-            77.0000000000) /* H:SCALE V:SCALE F:(l:14,t:300,r:14,b:14,w:332,h:77) */;
+        var frame = Rect.fromLTWH(14.0000000000, 13.0000000000, 332.0000000000,
+            77.0000000000) /* H:SCALE V:SCALE F:(l:14,t:13,r:14,b:14,w:332,h:77) */;
         canvas.save();
         canvas.scale((container.width) / 360.0000000000,
-            (container.height) / 640.0000000000);
+            (container.height) / 353.0000000000);
         canvas.transform(Float64List.fromList([
           1.0000000000,
           0.0,
@@ -317,7 +300,7 @@ class Android2Painter extends CustomPainter {
                   Radius.circular(15)))
           ];
           fillGeometry.forEach((path) {
-            canvas.drawPath(path, _PaintCatalog.instance.paint_1);
+            canvas.drawPath(path, _PaintCatalog.instance.paint_0);
           });
           canvas.restore();
         };
@@ -401,7 +384,7 @@ class Android2Painter extends CustomPainter {
                     Radius.circular(10)))
             ];
             fillGeometry.forEach((path) {
-              canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+              canvas.drawPath(path, _PaintCatalog.instance.paint_1);
             });
             canvas.restore();
           };
@@ -533,7 +516,7 @@ class Android2Painter extends CustomPainter {
                     Radius.circular(10)))
             ];
             fillGeometry.forEach((path) {
-              canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+              canvas.drawPath(path, _PaintCatalog.instance.paint_1);
             });
             canvas.restore();
           };
@@ -663,7 +646,7 @@ class Android2Painter extends CustomPainter {
                     Radius.circular(10)))
             ];
             fillGeometry.forEach((path) {
-              canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+              canvas.drawPath(path, _PaintCatalog.instance.paint_1);
             });
             canvas.restore();
           };
@@ -793,7 +776,7 @@ class Android2Painter extends CustomPainter {
                     Radius.circular(10)))
             ];
             fillGeometry.forEach((path) {
-              canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+              canvas.drawPath(path, _PaintCatalog.instance.paint_1);
             });
             canvas.restore();
           };
@@ -852,11 +835,11 @@ class Android2Painter extends CustomPainter {
 
 // 9:194 : Row2 (INSTANCE)
       var draw_9_194 = (Canvas canvas, Rect container) {
-        var frame = Rect.fromLTWH(14.0000000000, 385.0000000000, 332.0000000000,
-            77.0000000000) /* H:SCALE V:SCALE F:(l:14,t:385,r:14,b:14,w:332,h:77) */;
+        var frame = Rect.fromLTWH(14.0000000000, 98.0000000000, 332.0000000000,
+            77.0000000000) /* H:SCALE V:SCALE F:(l:14,t:98,r:14,b:14,w:332,h:77) */;
         canvas.save();
         canvas.scale((container.width) / 360.0000000000,
-            (container.height) / 640.0000000000);
+            (container.height) / 353.0000000000);
         canvas.transform(Float64List.fromList([
           1.0000000000,
           0.0,
@@ -956,7 +939,7 @@ class Android2Painter extends CustomPainter {
                     Radius.circular(15)))
             ];
             fillGeometry.forEach((path) {
-              canvas.drawPath(path, _PaintCatalog.instance.paint_1);
+              canvas.drawPath(path, _PaintCatalog.instance.paint_0);
             });
             canvas.restore();
           };
@@ -1044,7 +1027,7 @@ class Android2Painter extends CustomPainter {
                       Radius.circular(10)))
               ];
               fillGeometry.forEach((path) {
-                canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+                canvas.drawPath(path, _PaintCatalog.instance.paint_1);
               });
               canvas.restore();
             };
@@ -1181,7 +1164,7 @@ class Android2Painter extends CustomPainter {
                       Radius.circular(10)))
               ];
               fillGeometry.forEach((path) {
-                canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+                canvas.drawPath(path, _PaintCatalog.instance.paint_1);
               });
               canvas.restore();
             };
@@ -1316,7 +1299,7 @@ class Android2Painter extends CustomPainter {
                       Radius.circular(10)))
               ];
               fillGeometry.forEach((path) {
-                canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+                canvas.drawPath(path, _PaintCatalog.instance.paint_1);
               });
               canvas.restore();
             };
@@ -1451,7 +1434,7 @@ class Android2Painter extends CustomPainter {
                       Radius.circular(10)))
               ];
               fillGeometry.forEach((path) {
-                canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+                canvas.drawPath(path, _PaintCatalog.instance.paint_1);
               });
               canvas.restore();
             };
@@ -1514,11 +1497,11 @@ class Android2Painter extends CustomPainter {
 
 // 9:195 : Row3 (INSTANCE)
       var draw_9_195 = (Canvas canvas, Rect container) {
-        var frame = Rect.fromLTWH(14.0000000000, 470.0000000000, 332.0000000000,
-            77.0000000000) /* H:SCALE V:SCALE F:(l:14,t:470,r:14,b:14,w:332,h:77) */;
+        var frame = Rect.fromLTWH(14.0000000000, 183.0000000000, 332.0000000000,
+            77.0000000000) /* H:SCALE V:SCALE F:(l:14,t:183,r:14,b:14,w:332,h:77) */;
         canvas.save();
         canvas.scale((container.width) / 360.0000000000,
-            (container.height) / 640.0000000000);
+            (container.height) / 353.0000000000);
         canvas.transform(Float64List.fromList([
           1.0000000000,
           0.0,
@@ -1618,7 +1601,7 @@ class Android2Painter extends CustomPainter {
                     Radius.circular(15)))
             ];
             fillGeometry.forEach((path) {
-              canvas.drawPath(path, _PaintCatalog.instance.paint_1);
+              canvas.drawPath(path, _PaintCatalog.instance.paint_0);
             });
             canvas.restore();
           };
@@ -1706,7 +1689,7 @@ class Android2Painter extends CustomPainter {
                       Radius.circular(10)))
               ];
               fillGeometry.forEach((path) {
-                canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+                canvas.drawPath(path, _PaintCatalog.instance.paint_1);
               });
               canvas.restore();
             };
@@ -1843,7 +1826,7 @@ class Android2Painter extends CustomPainter {
                       Radius.circular(10)))
               ];
               fillGeometry.forEach((path) {
-                canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+                canvas.drawPath(path, _PaintCatalog.instance.paint_1);
               });
               canvas.restore();
             };
@@ -1978,7 +1961,7 @@ class Android2Painter extends CustomPainter {
                       Radius.circular(10)))
               ];
               fillGeometry.forEach((path) {
-                canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+                canvas.drawPath(path, _PaintCatalog.instance.paint_1);
               });
               canvas.restore();
             };
@@ -2113,7 +2096,7 @@ class Android2Painter extends CustomPainter {
                       Radius.circular(10)))
               ];
               fillGeometry.forEach((path) {
-                canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+                canvas.drawPath(path, _PaintCatalog.instance.paint_1);
               });
               canvas.restore();
             };
@@ -2176,11 +2159,11 @@ class Android2Painter extends CustomPainter {
 
 // 9:196 : Row4 (INSTANCE)
       var draw_9_196 = (Canvas canvas, Rect container) {
-        var frame = Rect.fromLTWH(14.0000000000, 555.0000000000, 332.0000000000,
-            77.0000000000) /* H:SCALE V:SCALE F:(l:14,t:555,r:14,b:14,w:332,h:77) */;
+        var frame = Rect.fromLTWH(14.0000000000, 268.0000000000, 332.0000000000,
+            77.0000000000) /* H:SCALE V:SCALE F:(l:14,t:268,r:14,b:14,w:332,h:77) */;
         canvas.save();
         canvas.scale((container.width) / 360.0000000000,
-            (container.height) / 640.0000000000);
+            (container.height) / 353.0000000000);
         canvas.transform(Float64List.fromList([
           1.0000000000,
           0.0,
@@ -2280,7 +2263,7 @@ class Android2Painter extends CustomPainter {
                     Radius.circular(15)))
             ];
             fillGeometry.forEach((path) {
-              canvas.drawPath(path, _PaintCatalog.instance.paint_1);
+              canvas.drawPath(path, _PaintCatalog.instance.paint_0);
             });
             canvas.restore();
           };
@@ -2368,7 +2351,7 @@ class Android2Painter extends CustomPainter {
                       Radius.circular(10)))
               ];
               fillGeometry.forEach((path) {
-                canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+                canvas.drawPath(path, _PaintCatalog.instance.paint_1);
               });
               canvas.restore();
             };
@@ -2505,7 +2488,7 @@ class Android2Painter extends CustomPainter {
                       Radius.circular(10)))
               ];
               fillGeometry.forEach((path) {
-                canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+                canvas.drawPath(path, _PaintCatalog.instance.paint_1);
               });
               canvas.restore();
             };
@@ -2640,7 +2623,7 @@ class Android2Painter extends CustomPainter {
                       Radius.circular(10)))
               ];
               fillGeometry.forEach((path) {
-                canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+                canvas.drawPath(path, _PaintCatalog.instance.paint_1);
               });
               canvas.restore();
             };
@@ -2775,7 +2758,7 @@ class Android2Painter extends CustomPainter {
                       Radius.circular(10)))
               ];
               fillGeometry.forEach((path) {
-                canvas.drawPath(path, _PaintCatalog.instance.paint_2);
+                canvas.drawPath(path, _PaintCatalog.instance.paint_1);
               });
               canvas.restore();
             };
@@ -2865,15 +2848,12 @@ class _PathCatalog {
 class _PaintCatalog {
   _PaintCatalog() {
     this.paint_0 = (Paint()..color = _ColorCatalog.instance.color_2);
-    this.paint_1 = (Paint()..color = _ColorCatalog.instance.color_4);
-    this.paint_2 = (Paint()..color = _ColorCatalog.instance.color_5);
+    this.paint_1 = (Paint()..color = _ColorCatalog.instance.color_3);
   }
 
   Paint paint_0;
 
   Paint paint_1;
-
-  Paint paint_2;
 
   static final _PaintCatalog instance = _PaintCatalog();
 }
@@ -2888,10 +2868,9 @@ class _ColorCatalog {
   _ColorCatalog() {
     this.color_0 = Color.fromARGB(255, 191, 250, 240);
     this.color_1 = Color.fromARGB(0, 0, 0, 0);
-    this.color_2 = Color.fromARGB(255, 0, 255, 209);
-    this.color_3 = Color.fromARGB(255, 0, 0, 0);
-    this.color_4 = Color.fromARGB(255, 196, 196, 196);
-    this.color_5 = Color.fromARGB(255, 150, 150, 150);
+    this.color_2 = Color.fromARGB(255, 196, 196, 196);
+    this.color_3 = Color.fromARGB(255, 150, 150, 150);
+    this.color_4 = Color.fromARGB(255, 0, 0, 0);
   }
 
   Color color_0;
@@ -2904,8 +2883,6 @@ class _ColorCatalog {
 
   Color color_4;
 
-  Color color_5;
-
   static final _ColorCatalog instance = _ColorCatalog();
 }
 
@@ -2913,7 +2890,7 @@ class _TextStyleCatalog {
   _TextStyleCatalog() {
     this.ui_TextStyle_0 = ui.TextStyle(
       fontFamily: 'IBM Plex Sans',
-      color: _ColorCatalog.instance.color_3,
+      color: _ColorCatalog.instance.color_4,
       fontSize: 24.0000000000,
       fontWeight: FontWeight.w600,
     );
