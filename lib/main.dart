@@ -11,7 +11,6 @@ class Android2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        //brightness: Brightness.dark,
         accentColor: Colors.deepOrangeAccent,
       ),
       home: Scaffold(
@@ -32,16 +31,28 @@ class Android2 extends StatelessWidget {
         body: Column(
           children: <Widget>[
             Expanded(
+              flex: 4,
               child: Container(
                 child: Center(
                   child: CustomPaint(
-                    foregroundPainter: new AndroidPainter(),
-                    child: Container(),
+                    painter: new AndroidPainter(),
+                    child: Container(
+                      height: 264,
+                      margin: EdgeInsets.all(30.0),
+                      child: TextField(
+                        autofocus: true,
+                        readOnly: true,
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Enter the expression you want to calculate'),
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
             Expanded(
+              flex: 6,
               child: Container(
                 child: Center(
                   child: CustomPaint(
@@ -53,13 +64,6 @@ class Android2 extends StatelessWidget {
             ),
           ],
         ),
-        //  Padding(
-        //   padding: EdgeInsets.all(8.0),
-        //   child: CustomPaint(
-        //     painter: Android2Painter(),
-        //   ),
-        // ),
-        // ),
       ),
     );
   }
@@ -104,8 +108,6 @@ class AndroidPainter extends CustomPainter {
       canvas.drawRect(Offset.zero & frame.size,
           (Paint()..color = _ColorCatalog.instance.color_0));
 
-// 15:0 : Rectangle 29 (RECTANGLE)
-     
 
 // 9:5 : Rectangle 28 (RECTANGLE)
       var draw_9_5 = (Canvas canvas, Rect container) {
@@ -113,7 +115,7 @@ class AndroidPainter extends CustomPainter {
             244.0000000000) /* H:SCALE V:SCALE F:(l:0,t:-18,r:0,b:0,w:332,h:278) */;
         canvas.save();
         canvas.scale((container.width) / 360.0000000000,
-            (container.height) / 258.0000000000);
+            (container.height) / 254.0000000000);
         canvas.transform(Float64List.fromList([
           1.0000000000,
           0.0,
