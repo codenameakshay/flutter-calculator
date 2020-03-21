@@ -4,13 +4,26 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This is a Calculator app made entirely in Flutter. 
+It can be used for basic calculations, and supports light/dark Themes.
+It is based on Material Design and uses url_launcher and expression_language as it's dependencies.
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- [Starting Page](examples/Screenshot_1584806141.png)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Drawer Tab](examples/Screenshot_1584806147.png)
+
+- [Dark Theme](examples/Screenshot_1584806153.png)
+
+- [Sample1](examples/Screenshot_1584806162.png)
+
+- [Answer1](examples/Screenshot_1584806165.png)
+
+- [Sample2](examples/Screenshot_1584806199.png)
+
+- [Answer2](examples/Screenshot_1584806201.png)
+
+## Usage
+
+You can download the app from the build\app\outputs\apk\release\app-release.apk
