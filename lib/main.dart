@@ -4,37 +4,74 @@ import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:dynamic_theme/theme_switcher_widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './SizeConfig.dart';
+import './theming.dart';
+import 'package:day_night_switch/day_night_switch.dart';
 import 'dart:ui' as ui;
 // height: SizeConfig.safeBlockVertical * 25,
 // width: SizeConfig.safeBlockHorizontal * 55,
 
 void main() {
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
-    runApp(Android2());
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+  //     .then((_) {
+  SharedPreferences.getInstance().then((prefs) {
+    var darkModeOn = prefs.getBool('darkMode') ?? true;
+    runApp(ChangeNotifierProvider<ThemeNotifier>(
+        create: (_) => ThemeNotifier(darkModeOn ? darkTheme : lightTheme),
+        child: Android1()));
+    // });
   });
 }
 
-class Android2 extends StatelessWidget {
+class ThemeNotifier with ChangeNotifier {
+  ThemeData _themeData;
+
+  ThemeNotifier(this._themeData);
+
+  getTheme() => _themeData;
+
+  setTheme(ThemeData themeData) async {
+    _themeData = themeData;
+    notifyListeners();
+  }
+}
+ var _darkTheme = true;
+
+class Android1 extends StatefulWidget {
+   @override
+  Android2 createState() => Android2();
+}
+
+class Android2 extends State<Android1> {
   Android2();
 
   @override
   Widget build(BuildContext context) {
-    void changeBrightness() {
-      DynamicTheme.of(context).setBrightness(
-          Theme.of(context).brightness == Brightness.dark
-              ? Brightness.light
-              : Brightness.dark);
+    // void changeBrightness() {
+    //   DynamicTheme.of(context).setBrightness(
+    //       Theme.of(context).brightness == Brightness.dark
+    //           ? Brightness.light
+    //           : Brightness.dark);
+    // }
+
+    // void changeColor() {
+    //   DynamicTheme.of(context).setThemeData(new ThemeData(
+    //       primaryColor: Theme.of(context).primaryColor == Colors.indigo
+    //           ? Colors.red
+    //           : Colors.indigo));
+    // }
+    void onThemeChanged(bool value, ThemeNotifier themeNotifier) async {
+      (value)
+          ? themeNotifier.setTheme(darkTheme)
+          : themeNotifier.setTheme(lightTheme);
+      var prefs = await SharedPreferences.getInstance();
+      prefs.setBool('darkMode', value);
     }
 
-    void changeColor() {
-      DynamicTheme.of(context).setThemeData(new ThemeData(
-          primaryColor: Theme.of(context).primaryColor == Colors.indigo
-              ? Colors.red
-              : Colors.indigo));
-    }
-
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
+    _darkTheme = (themeNotifier.getTheme() == darkTheme);
     return new DynamicTheme(
       defaultBrightness: Brightness.light,
       data: (brightness) => new ThemeData(
@@ -43,10 +80,7 @@ class Android2 extends StatelessWidget {
       ),
       themedWidgetBuilder: (context, theme) {
         return MaterialApp(
-          theme: ThemeData(
-            fontFamily: 'IBM Plex Sans',
-            accentColor: Colors.deepOrangeAccent,
-          ),
+          theme: themeNotifier.getTheme(),
           home: Scaffold(
             drawer: Drawer(
               child: ListView(
@@ -72,8 +106,15 @@ class Android2 extends StatelessWidget {
                   ListTile(
                     title: Text('Change theme'),
                     leading: Icon(Icons.brightness_high),
-                    onTap: changeBrightness,
-                    onLongPress: changeColor,
+                  ),
+                  DayNightSwitch(
+                    value: _darkTheme,
+                    onChanged: (val) {
+                      setState(() {
+                        _darkTheme = val;
+                      });
+                      onThemeChanged(val, themeNotifier);
+                    },
                   ),
                   ListTile(
                     leading: Icon(Icons.open_in_browser),
