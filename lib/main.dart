@@ -2,586 +2,457 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:dynamic_theme/theme_switcher_widgets.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import './SizeConfig.dart';
-import './theming.dart';
-import 'package:day_night_switch/day_night_switch.dart';
+// import 'package:provider/provider.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+
+// import './theming.dart';
+// import 'package:day_night_switch/day_night_switch.dart';
 import 'dart:ui' as ui;
+
 // height: SizeConfig.safeBlockVertical * 25,
 // width: SizeConfig.safeBlockHorizontal * 55,
-
+var widthpixels = 720;
+var heightpixels = 1440;
+var txt = TextEditingController();
 void main() {
-  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-  //     .then((_) {
-  SharedPreferences.getInstance().then((prefs) {
-    var darkModeOn = prefs.getBool('darkMode') ?? true;
-    runApp(ChangeNotifierProvider<ThemeNotifier>(
-        create: (_) => ThemeNotifier(darkModeOn ? darkTheme : lightTheme),
-        child: Android1()));
-    // });
-  });
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
+  //   (_) {
+  // SharedPreferences.getInstance().then(
+  //   (prefs) {
+  //     var darkModeOn = prefs.getBool('darkMode') ?? true;
+  //     runApp(ChangeNotifierProvider<ThemeNotifier>(
+  //         create: (_) => ThemeNotifier(darkModeOn ? darkTheme : lightTheme),
+  // child:
+  runApp(_Android2State());
+  // ));
+  // });
+  //   },
+  // );
 }
+//   );
+// }
 
-class ThemeNotifier with ChangeNotifier {
-  ThemeData _themeData;
+// class ThemeNotifier with ChangeNotifier {
+//   ThemeData _themeData;
 
-  ThemeNotifier(this._themeData);
+//   ThemeNotifier(this._themeData);
 
-  getTheme() => _themeData;
+//   getTheme() => _themeData;
 
-  setTheme(ThemeData themeData) async {
-    _themeData = themeData;
-    notifyListeners();
-  }
-}
- var _darkTheme = true;
+//   setTheme(ThemeData themeData) async {
+//     _themeData = themeData;
+//     notifyListeners();
+//   }
+// }
 
-class Android1 extends StatefulWidget {
-   @override
-  Android2 createState() => Android2();
-}
+// class Android1 extends StatefulWidget {
+//   @override
+//   State<StatefulWidget> createState() {
+//     return _Android2State();
+//   }
+// }
 
-class Android2 extends State<Android1> {
-  Android2();
+class _Android2State extends StatelessWidget {
+  // var _darkTheme = true;
+
+  _Android2State();
 
   @override
   Widget build(BuildContext context) {
-    // void changeBrightness() {
-    //   DynamicTheme.of(context).setBrightness(
-    //       Theme.of(context).brightness == Brightness.dark
-    //           ? Brightness.light
-    //           : Brightness.dark);
+    // void onThemeChanged(bool value, ThemeNotifier themeNotifier) async {
+    //   (value)
+    //       ? themeNotifier.setTheme(darkTheme)
+    //       : themeNotifier.setTheme(lightTheme);
+    //   var prefs = await SharedPreferences.getInstance();
+    //   prefs.setBool('darkMode', value);
     // }
 
-    // void changeColor() {
-    //   DynamicTheme.of(context).setThemeData(new ThemeData(
-    //       primaryColor: Theme.of(context).primaryColor == Colors.indigo
-    //           ? Colors.red
-    //           : Colors.indigo));
-    // }
-    void onThemeChanged(bool value, ThemeNotifier themeNotifier) async {
-      (value)
-          ? themeNotifier.setTheme(darkTheme)
-          : themeNotifier.setTheme(lightTheme);
-      var prefs = await SharedPreferences.getInstance();
-      prefs.setBool('darkMode', value);
-    }
-
-    final themeNotifier = Provider.of<ThemeNotifier>(context);
-    _darkTheme = (themeNotifier.getTheme() == darkTheme);
-    return new DynamicTheme(
-      defaultBrightness: Brightness.light,
-      data: (brightness) => new ThemeData(
-        primarySwatch: Colors.indigo,
-        brightness: brightness,
-      ),
-      themedWidgetBuilder: (context, theme) {
-        return MaterialApp(
-          theme: themeNotifier.getTheme(),
-          home: Scaffold(
-            drawer: Drawer(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  DrawerHeader(
-                    child: Image.network(
-                      'https://avatars2.githubusercontent.com/u/60510869?s=460&u=ea7872a9aa9189cfc2b0910a51e4b83d458709a3&v=4',
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.cyan[200],
-                    ),
-                  ),
-                  ListTile(
-                    title: Center(
-                      child: Text('CodeNameAKshay'),
-                    ),
-                    onTap: () {
-                      // Update the state of the app.
-                      // ...
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Change theme'),
-                    leading: Icon(Icons.brightness_high),
-                  ),
-                  DayNightSwitch(
-                    value: _darkTheme,
-                    onChanged: (val) {
-                      setState(() {
-                        _darkTheme = val;
-                      });
-                      onThemeChanged(val, themeNotifier);
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.open_in_browser),
-                    title: new InkWell(
-                        child: Text('Visit my website!'),
-                        onTap: () {
-                          launch('http://codenameakshay.tech');
-                          Navigator.pop(context);
-                        }),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
-            ),
-            appBar: AppBar(
-              iconTheme:
-                  new IconThemeData(color: _ColorCatalog.instance.color_4),
-              title: Center(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    right: (25.0),
-                  ),
-                  child: Text(
-                    'Flutter_Calc',
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      color: _ColorCatalog.instance.color_4,
-                      fontSize: 24.0000000000,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+    // final themeNotifier = Provider.of<ThemeNotifier>(context);
+    // _darkTheme = (themeNotifier.getTheme() == darkTheme);
+    return MaterialApp(
+      // theme: themeNotifier.getTheme(),
+      home: Scaffold(
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Image.network(
+                  'https://avatars2.githubusercontent.com/u/60510869?s=460&u=ea7872a9aa9189cfc2b0910a51e4b83d458709a3&v=4',
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.cyan[200],
                 ),
               ),
-              backgroundColor: Colors.cyanAccent[200],
+              ListTile(
+                title: Center(
+                  child: Text('CodeNameAKshay'),
+                ),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title: Text('Change theme'),
+                leading: Icon(Icons.brightness_high),
+              ),
+              // DayNightSwitch(
+              //   value: _darkTheme,
+              //   onChanged: (val) {
+              //     setState(() {
+              //       _darkTheme = val;
+              //     });
+              //     onThemeChanged(val, themeNotifier);
+              //   },
+              // ),
+              ListTile(
+                leading: Icon(Icons.open_in_browser),
+                title: new InkWell(
+                    child: Text('Visit my website!'),
+                    onTap: () {
+                      launch('http://codenameakshay.tech');
+                      Navigator.pop(context);
+                    }),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        ),
+        appBar: AppBar(
+          iconTheme: new IconThemeData(color: _ColorCatalog.instance.color_4),
+          title: Center(
+            child: Padding(
+              padding: EdgeInsets.only(
+                right: (25.0),
+              ),
+              child: Text(
+                'Flutter_Calc',
+                style: TextStyle(
+                  fontFamily: 'IBM Plex Sans',
+                  color: _ColorCatalog.instance.color_4,
+                  fontSize: 24.0000000000,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-            body: Column(
-              children: <Widget>[
-                Expanded(
-                  flex: 4,
-                  child: Container(
-                    child: Center(
-                      child: CustomPaint(
-                        painter: new AndroidPainter(),
-                        child: Container(
-                          height: 264,
-                          margin: EdgeInsets.all(30.0),
-                          child: TextField(
-                            autofocus: true,
-                            readOnly: true,
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText:
-                                    'Enter the expression you want to calculate'),
-                          ),
-                        ),
+          ),
+          backgroundColor: Colors.cyanAccent[200],
+        ),
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 4,
+              child: Container(
+                child: Center(
+                  child: CustomPaint(
+                    painter: new AndroidPainter(),
+                    child: Container(
+                      height: 264,
+                      margin: EdgeInsets.all(30.0),
+                      child: TextField(
+                        showCursor: false,
+                        controller: txt,
+                        autofocus: true,
+                        readOnly: true,
+                        expands: true,
+                        minLines: null,
+                        maxLines: null,
+                        // maxLength: 5,
+                        // maxLengthEnforced: true,
+                        textAlign: TextAlign.right,
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText:
+                                'Enter the expression you want to calculate'),
                       ),
                     ),
                   ),
                 ),
-                Flexible(
-                  flex: 6,
-                  child: Container(
-                    child: Center(
-                      child: CustomPaint(
-                        painter: new Android2Painter(),
-                        child: Container(
-                          child: Column(
-                            children: <Widget>[
-                              Expanded(
-                                child: Column(
+              ),
+            ),
+            Flexible(
+              flex: 6,
+              child: Container(
+                child: Center(
+                  child: CustomPaint(
+                    painter: new Android2Painter(),
+                    child: Container(
+                      child: Column(
+                        children: <Widget>[
+                          Expanded(
+                            child: Column(
+                              children: <Widget>[
+                                Row(
                                   children: <Widget>[
-                                    Row(
+                                    Column(
                                       children: <Widget>[
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 28.0,
-                                                right: 10.0,
-                                                left: 29.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 28.0,
-                                                right: 10.0,
-                                                left: 10.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 28.0,
-                                                right: 10.0,
-                                                left: 11.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 28.0,
-                                                right: 10.0,
-                                                left: 10.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 28.0,
+                                            right: 10.0,
+                                            left: 29.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("7"),
                                         ),
                                       ],
                                     ),
-                                    Row(
+                                    Column(
                                       children: <Widget>[
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 26.0,
-                                                right: 10.0,
-                                                left: 29.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 26.0,
-                                                right: 10.0,
-                                                left: 10.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 26.0,
-                                                right: 10.0,
-                                                left: 11.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 26.0,
-                                                right: 10.0,
-                                                left: 10.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 28.0,
+                                            right: 10.0,
+                                            left: 10.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("8"),
                                         ),
                                       ],
                                     ),
-                                    Row(
+                                    Column(
                                       children: <Widget>[
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 26.0,
-                                                right: 10.0,
-                                                left: 29.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 26.0,
-                                                right: 10.0,
-                                                left: 10.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 26.0,
-                                                right: 10.0,
-                                                left: 11.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 26.0,
-                                                right: 10.0,
-                                                left: 10.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 28.0,
+                                            right: 10.0,
+                                            left: 11.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("9"),
                                         ),
                                       ],
                                     ),
-                                    Row(
+                                    Column(
                                       children: <Widget>[
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 26.0,
-                                                right: 10.0,
-                                                left: 29.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 26.0,
-                                                right: 10.0,
-                                                left: 10.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 26.0,
-                                                right: 10.0,
-                                                left: 11.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 26.0,
-                                                right: 10.0,
-                                                left: 10.0,
-                                                bottom: 10.0,
-                                              ),
-                                              child: ButtonTheme(
-                                                buttonColor: _ColorCatalog
-                                                    .instance.color_1,
-                                                minWidth: 68.0,
-                                                height: 59.0,
-                                                child:
-                                                    RaisedButton(onPressed: () {
-                                                  HapticFeedback.vibrate();
-                                                }),
-                                              ),
-                                            ),
-                                          ],
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 28.0,
+                                            right: 10.0,
+                                            left: 10.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("+"),
                                         ),
                                       ],
                                     ),
                                   ],
                                 ),
-                              ),
-                            ],
+                                Row(
+                                  children: <Widget>[
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 26.0,
+                                            right: 10.0,
+                                            left: 29.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("4"),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 26.0,
+                                            right: 10.0,
+                                            left: 10.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("5"),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 26.0,
+                                            right: 10.0,
+                                            left: 11.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("6"),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 26.0,
+                                            right: 10.0,
+                                            left: 10.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("-"),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 26.0,
+                                            right: 10.0,
+                                            left: 29.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("1"),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 26.0,
+                                            right: 10.0,
+                                            left: 10.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("2"),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 26.0,
+                                            right: 10.0,
+                                            left: 11.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("3"),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 26.0,
+                                            right: 10.0,
+                                            left: 10.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("*"),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 26.0,
+                                            right: 10.0,
+                                            left: 29.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("."),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 26.0,
+                                            right: 10.0,
+                                            left: 10.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("0"),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 26.0,
+                                            right: 10.0,
+                                            left: 11.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("="),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 26.0,
+                                            right: 10.0,
+                                            left: 10.0,
+                                            bottom: 10.0,
+                                          ),
+                                          child: AndroidButton1("/"),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                      // ),
                     ),
                   ),
+                  // ),
                 ),
-              ],
+              ),
             ),
-          ),
-        );
-      },
+          ],
+        ),
+      ),
     );
   }
 }
 
-class AndroidSize extends StatelessWidget {
-  AndroidSize();
+class AndroidButton1 extends StatelessWidget {
+  String inputText = "";
+
+  AndroidButton1(this.inputText);
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
+    // return Container(
+    //   width: 68.0,
+    //   height: 59.0,
+    //   child: LayoutBuilder(
+    //     builder: (BuildContext context, BoxConstraints constraints) {
+    return ButtonTheme(
+      buttonColor: _ColorCatalog.instance.color_1,
+      minWidth: 68.0 / widthpixels * 1080/1.45,
+      height: 59.0 / heightpixels * 2160/1.35,
+      child: RaisedButton(
+        onPressed: () {
+          txt.text += inputText;
+          HapticFeedback.vibrate();
+        },
+      ),
+    );
+    //     },
+    //   ),
+    // );
   }
 }
 
