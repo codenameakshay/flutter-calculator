@@ -1,77 +1,49 @@
 import 'dart:typed_data';
+import 'package:expression_language/expression_language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
-// import 'package:provider/provider.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-
-// import './theming.dart';
-// import 'package:day_night_switch/day_night_switch.dart';
 import 'dart:ui' as ui;
 
-// height: SizeConfig.safeBlockVertical * 25,
-// width: SizeConfig.safeBlockHorizontal * 55,
+var darkMode = false;
 var widthpixels = 720;
 var heightpixels = 1440;
 var txt = TextEditingController();
 void main() {
-  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
-  //   (_) {
-  // SharedPreferences.getInstance().then(
-  //   (prefs) {
-  //     var darkModeOn = prefs.getBool('darkMode') ?? true;
-  //     runApp(ChangeNotifierProvider<ThemeNotifier>(
-  //         create: (_) => ThemeNotifier(darkModeOn ? darkTheme : lightTheme),
-  // child:
-  runApp(_Android2State());
-  // ));
-  // });
-  //   },
-  // );
+  runApp(MyApp());
 }
-//   );
-// }
 
-// class ThemeNotifier with ChangeNotifier {
-//   ThemeData _themeData;
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _MyAppState();
+  }
+}
 
-//   ThemeNotifier(this._themeData);
-
-//   getTheme() => _themeData;
-
-//   setTheme(ThemeData themeData) async {
-//     _themeData = themeData;
-//     notifyListeners();
-//   }
-// }
-
-// class Android1 extends StatefulWidget {
-//   @override
-//   State<StatefulWidget> createState() {
-//     return _Android2State();
-//   }
-// }
-
-class _Android2State extends StatelessWidget {
-  // var _darkTheme = true;
-
-  _Android2State();
+class _MyAppState extends State<MyApp> {
+  _MyAppState();
 
   @override
   Widget build(BuildContext context) {
-    // void onThemeChanged(bool value, ThemeNotifier themeNotifier) async {
-    //   (value)
-    //       ? themeNotifier.setTheme(darkTheme)
-    //       : themeNotifier.setTheme(lightTheme);
-    //   var prefs = await SharedPreferences.getInstance();
-    //   prefs.setBool('darkMode', value);
-    // }
-
-    // final themeNotifier = Provider.of<ThemeNotifier>(context);
-    // _darkTheme = (themeNotifier.getTheme() == darkTheme);
     return MaterialApp(
-      // theme: themeNotifier.getTheme(),
       home: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            txt.text = '';
+          },
+          child: Text(
+            'AC',
+            style: TextStyle(
+              fontFamily: 'IBM Plex Sans',
+              color: _ColorCatalog.instance.color_4,
+              fontSize: 24.0000000000,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          foregroundColor: _ColorCatalog.instance.color_4,
+          backgroundColor: Colors.cyanAccent[200],
+        ),
         drawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
@@ -93,30 +65,45 @@ class _Android2State extends StatelessWidget {
                   // ...
                 },
               ),
-              ListTile(
-                title: Text('Change theme'),
-                leading: Icon(Icons.brightness_high),
+              Builder(
+                builder: (context) => ListTile(
+                  title: Text('Clear memory'),
+                  leading: Icon(Icons.memory),
+                  onTap: () {
+                    txt.text = '';
+                  },
+                ),
               ),
-              // DayNightSwitch(
-              //   value: _darkTheme,
-              //   onChanged: (val) {
-              //     setState(() {
-              //       _darkTheme = val;
-              //     });
-              //     onThemeChanged(val, themeNotifier);
-              //   },
-              // ),
-              ListTile(
-                leading: Icon(Icons.open_in_browser),
-                title: new InkWell(
-                    child: Text('Visit my website!'),
-                    onTap: () {
-                      launch('http://codenameakshay.tech');
-                      Navigator.pop(context);
-                    }),
-                onTap: () {
-                  Navigator.pop(context);
-                },
+              Builder(
+                builder: (context) => ListTile(
+                  title: Text('Change Theme'),
+                  leading: Icon(Icons.brightness_4),
+                  onTap: () {
+                    setState(
+                      () {
+                        _ColorCatalog.instance = darkMode
+                            ? _ColorCatalog.instancelight
+                            : _ColorCatalog.instancedark;
+                        darkMode = darkMode ? false : true;
+                      },
+                    );
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+              Builder(
+                builder: (context) => ListTile(
+                  leading: Icon(Icons.open_in_browser),
+                  title: new InkWell(
+                      child: Text('Visit my website!'),
+                      onTap: () {
+                        launch('http://codenameakshay.tech');
+                        Navigator.pop(context);
+                      }),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
               ),
             ],
           ),
@@ -160,13 +147,19 @@ class _Android2State extends StatelessWidget {
                         expands: true,
                         minLines: null,
                         maxLines: null,
+                        style: TextStyle(
+                          fontFamily: 'IBM Plex Sans',
+                          color: _ColorCatalog.instance.color_4,
+                          fontSize: 24.0000000000,
+                          fontWeight: FontWeight.bold,
+                        ),
                         // maxLength: 5,
                         // maxLengthEnforced: true,
                         textAlign: TextAlign.right,
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText:
-                                'Enter the expression you want to calculate'),
+                                'Enter the expression\nyou want to calculate'),
                       ),
                     ),
                   ),
@@ -441,12 +434,23 @@ class AndroidButton1 extends StatelessWidget {
     //     builder: (BuildContext context, BoxConstraints constraints) {
     return ButtonTheme(
       buttonColor: _ColorCatalog.instance.color_1,
-      minWidth: 68.0 / widthpixels * 1080/1.45,
-      height: 59.0 / heightpixels * 2160/1.35,
+      minWidth: 68.0 / widthpixels * 1080 / 1.45,
+      height: 59.0 / heightpixels * 2160 / 1.35,
       child: RaisedButton(
         onPressed: () {
-          txt.text += inputText;
-          HapticFeedback.vibrate();
+          if (inputText == "=") {
+            String b = txt.text;
+            var expressionGrammarDefinition = ExpressionGrammarParser({});
+            var parser = expressionGrammarDefinition.build();
+            var result = parser.parse(b);
+            var expression = result.value as Expression;
+            var value = expression.evaluate();
+            txt.text = value.toString(); // = true
+          } else {
+            txt.text += inputText;
+            HapticFeedback.vibrate();
+          }
+          ;
         },
       ),
     );
@@ -3259,9 +3263,16 @@ class _ColorCatalog {
   _ColorCatalog() {
     this.color_0 = Color.fromARGB(255, 191, 250, 240);
     this.color_1 = Color.fromARGB(0, 0, 0, 0);
-    this.color_2 = Color.fromARGB(255, 196, 196, 196);
-    this.color_3 = Color.fromARGB(255, 150, 150, 150);
+    this.color_2 = Color.fromARGB(255, 150, 150, 150);
+    this.color_3 = Color.fromARGB(255, 89, 89, 89);
     this.color_4 = Color.fromARGB(255, 0, 0, 0);
+  }
+  _ColorCatalog.zero() {
+    this.color_0 = Color.fromARGB(255, 0, 0, 50);
+    this.color_1 = Color.fromARGB(0, 0, 0, 0);
+    this.color_2 = Color.fromARGB(255, 89, 89, 89);
+    this.color_3 = Color.fromARGB(255, 150, 150, 150);
+    this.color_4 = Color.fromARGB(255, 255, 255, 255);
   }
 
   Color color_0;
@@ -3274,7 +3285,9 @@ class _ColorCatalog {
 
   Color color_4;
 
-  static final _ColorCatalog instance = _ColorCatalog();
+  static _ColorCatalog instance = _ColorCatalog();
+  static _ColorCatalog instancelight = _ColorCatalog();
+  static _ColorCatalog instancedark = _ColorCatalog.zero();
 }
 
 class _TextStyleCatalog {
