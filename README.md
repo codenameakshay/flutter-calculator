@@ -10,19 +10,19 @@ It is based on Material Design and uses url_launcher and expression_language as 
 
 ## Screenshots
 
-- [Starting Page](examples/Screenshot_1584806141.png)
+- ![Starting Page](examples/Screenshot_1584806141.png)
 
-- [Drawer Tab](examples/Screenshot_1584806147.png)
+- ![Drawer Tab](examples/Screenshot_1584806147.png)
 
-- [Dark Theme](examples/Screenshot_1584806153.png)
+- ![Dark Theme](examples/Screenshot_1584806153.png)
 
-- [Sample1](examples/Screenshot_1584806162.png)
+- ![Sample1](examples/Screenshot_1584806162.png)
 
-- [Answer1](examples/Screenshot_1584806165.png)
+- ![Answer1](examples/Screenshot_1584806165.png)
 
-- [Sample2](examples/Screenshot_1584806199.png)
+- ![Sample2](examples/Screenshot_1584806199.png)
 
-- [Answer2](examples/Screenshot_1584806201.png)
+- ![Answer2](examples/Screenshot_1584806201.png)
 
 ## Usage
 
