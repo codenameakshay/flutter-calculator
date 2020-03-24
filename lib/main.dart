@@ -142,7 +142,7 @@ class _MyAppState extends State<MyApp> {
                       child: TextField(
                         showCursor: false,
                         controller: txt,
-                        autofocus: true,
+                        
                         readOnly: true,
                         expands: true,
                         minLines: null,
