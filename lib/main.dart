@@ -2,13 +2,19 @@ import 'dart:typed_data';
 import 'package:expression_language/expression_language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:neumorphic/neumorphic.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
 
-var darkMode = false;
+var lightMode = true;
 var widthpixels = 720;
 var heightpixels = 1440;
 var txt = TextEditingController();
+Color mainTheme = mainLight;
+Color mainLight = Color(0xFFC6D8F7);
+Color mainDark = Color(0xFF26282B);
+Color darkModeText = mainLight;
+Color lightModeText = mainDark;
 void main() {
   runApp(MyApp());
 }
@@ -27,6 +33,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: mainTheme,
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -36,97 +43,111 @@ class _MyAppState extends State<MyApp> {
             'AC',
             style: TextStyle(
               fontFamily: 'IBM Plex Sans',
-              color: _ColorCatalog.instance.color_4,
+              color: lightMode ? lightModeText : darkModeText,
               fontSize: 24.0000000000,
               fontWeight: FontWeight.bold,
             ),
           ),
           foregroundColor: _ColorCatalog.instance.color_4,
-          backgroundColor: Colors.cyanAccent[200],
+          backgroundColor: mainTheme,
         ),
         drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                child: Image.network(
-                  'https://avatars2.githubusercontent.com/u/60510869?s=460&u=ea7872a9aa9189cfc2b0910a51e4b83d458709a3&v=4',
+          child: Container(
+            color: mainTheme,
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                DrawerHeader(
+                  child: Image.network(
+                    'https://avatars2.githubusercontent.com/u/60510869?s=460&u=ea7872a9aa9189cfc2b0910a51e4b83d458709a3&v=4',
+                  ),
+                  decoration: BoxDecoration(
+                    color: mainTheme,
+                  ),
                 ),
-                decoration: BoxDecoration(
-                  color: Colors.cyan[200],
-                ),
-              ),
-              ListTile(
-                title: Center(
-                  child: Text('CodeNameAKshay'),
-                ),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              Builder(
-                builder: (context) => ListTile(
-                  title: Text('Clear memory'),
-                  leading: Icon(Icons.memory),
+                ListTile(
+                  title: Center(
+                    child: Text('CodeNameAKshay', style: TextStyle(color: lightMode ? lightModeText : darkModeText),),
+                  ),
                   onTap: () {
-                    txt.text = '';
+                    // Update the state of the app.
+                    // ...
                   },
                 ),
-              ),
-              Builder(
-                builder: (context) => ListTile(
-                  title: Text('Change Theme'),
-                  leading: Icon(Icons.brightness_4),
-                  onTap: () {
-                    setState(
-                      () {
-                        _ColorCatalog.instance = darkMode
-                            ? _ColorCatalog.instancelight
-                            : _ColorCatalog.instancedark;
-                        darkMode = darkMode ? false : true;
-                      },
-                    );
-                    Navigator.pop(context);
-                  },
+                Builder(
+                  builder: (context) => ListTile(
+                    title: Text('Clear memory',  style: TextStyle(color: lightMode ? lightModeText : darkModeText)),
+                    leading: Icon(Icons.memory,color: lightMode ? lightModeText : darkModeText,),
+                    onTap: () {
+                      txt.text = '';
+                    },
+                  ),
                 ),
-              ),
-              Builder(
-                builder: (context) => ListTile(
-                  leading: Icon(Icons.open_in_browser),
-                  title: new InkWell(
-                      child: Text('Visit my website!'),
-                      onTap: () {
-                        launch('http://codenameakshay.tech');
-                        Navigator.pop(context);
-                      }),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
+                Builder(
+                  builder: (context) => ListTile(
+                    title: Text('Change Theme',  style: TextStyle(color: lightMode ? lightModeText : darkModeText)),
+                    leading: Icon(Icons.brightness_4, color: lightMode ? lightModeText : darkModeText,),
+                    onTap: () {
+                      setState(
+                        () {
+                          // mainLight = Color(0xFF26282B);
+                          // _ColorCatalog.instance = darkMode
+                          //     ? _ColorCatalog.instancelight
+                          //     : _ColorCatalog.instancedark;
+                          // darkMode = darkMode ? false : true;
+                          mainTheme = lightMode ? mainDark : mainLight;
+                          if(lightMode == false){
+                            setState(() {
+                              lightMode = true;
+                            });
+                          }else{
+                            setState(() {
+                              lightMode = false;
+                            });
+                          }
+                        },
+                      );
+                      Navigator.pop(context);
+                    },
+                  ),
                 ),
-              ),
-            ],
+                Builder(
+                  builder: (context) => ListTile(
+                    leading: Icon(Icons.open_in_browser, color: lightMode ? lightModeText : darkModeText,),
+                    title: new InkWell(
+                        child: Text('Visit my website!',  style: TextStyle(color: lightMode ? lightModeText : darkModeText)),
+                        onTap: () {
+                          launch('http://codenameakshay.tech');
+                          Navigator.pop(context);
+                        }),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         appBar: AppBar(
-          iconTheme: new IconThemeData(color: _ColorCatalog.instance.color_4),
+          iconTheme: new IconThemeData(color: lightMode ? lightModeText : darkModeText,),
           title: Center(
             child: Padding(
               padding: EdgeInsets.only(
                 right: (25.0),
               ),
               child: Text(
-                'Flutter_Calc',
+                'Calculator',
                 style: TextStyle(
                   fontFamily: 'IBM Plex Sans',
-                  color: _ColorCatalog.instance.color_4,
+                  color: lightMode ? lightModeText : darkModeText,
                   fontSize: 24.0000000000,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
           ),
-          backgroundColor: Colors.cyanAccent[200],
+          backgroundColor: mainTheme,
         ),
         body: Column(
           children: <Widget>[
@@ -134,33 +155,31 @@ class _MyAppState extends State<MyApp> {
               flex: 4,
               child: Container(
                 child: Center(
-                  child: CustomPaint(
-                    painter: new AndroidPainter(),
-                    child: Container(
-                      height: 264,
-                      margin: EdgeInsets.all(30.0),
-                      child: TextField(
-                        showCursor: false,
-                        controller: txt,
-                        
-                        readOnly: true,
-                        expands: true,
-                        minLines: null,
-                        maxLines: null,
-                        style: TextStyle(
-                          fontFamily: 'IBM Plex Sans',
-                          color: _ColorCatalog.instance.color_4,
-                          fontSize: 24.0000000000,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        // maxLength: 5,
-                        // maxLengthEnforced: true,
-                        textAlign: TextAlign.right,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText:
-                                'Enter the expression\nyou want to calculate'),
+                  child: Container(
+                    height: 264,
+                    margin: EdgeInsets.all(30.0),
+                    child: TextField(
+                      showCursor: false,
+                      controller: txt,
+
+                      readOnly: true,
+                      expands: true,
+                      minLines: null,
+                      maxLines: null,
+                      style: TextStyle(
+                        fontFamily: 'IBM Plex Sans',
+                        color: lightMode ? lightModeText : darkModeText,
+                        fontSize: 24.0000000000,
+                        fontWeight: FontWeight.bold,
                       ),
+                      // maxLength: 5,
+                      // maxLengthEnforced: true,
+                      textAlign: TextAlign.right,
+                      decoration: InputDecoration(
+                        hintStyle: TextStyle(color: lightMode ? lightModeText : darkModeText,),
+                          border: InputBorder.none,
+                          hintText:
+                              'Enter the expression\nyou want to calculate'),
                     ),
                   ),
                 ),
@@ -170,243 +189,236 @@ class _MyAppState extends State<MyApp> {
               flex: 6,
               child: Container(
                 child: Center(
-                  child: CustomPaint(
-                    painter: new Android2Painter(),
-                    child: Container(
-                      child: Column(
-                        children: <Widget>[
-                          Expanded(
-                            child: Column(
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 28.0,
-                                            right: 10.0,
-                                            left: 29.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("7"),
+                  child: Container(
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          child: Column(
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 28.0,
+                                          right: 10.0,
+                                          left: 20.0,
+                                          bottom: 10.0,
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 28.0,
-                                            right: 10.0,
-                                            left: 10.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("8"),
+                                        child: AndroidButton1("7"),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 28.0,
+                                          right: 10.0,
+                                          left: 10.0,
+                                          bottom: 10.0,
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 28.0,
-                                            right: 10.0,
-                                            left: 11.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("9"),
+                                        child: AndroidButton1("8"),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 28.0,
+                                          right: 10.0,
+                                          left: 11.0,
+                                          bottom: 10.0,
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 28.0,
-                                            right: 10.0,
-                                            left: 10.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("+"),
+                                        child: AndroidButton1("9"),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 28.0,
+                                          right: 10.0,
+                                          left: 10.0,
+                                          bottom: 10.0,
                                         ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 26.0,
-                                            right: 10.0,
-                                            left: 29.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("4"),
+                                        child: AndroidButton1("+"),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 26.0,
+                                          right: 10.0,
+                                          left: 20.0,
+                                          bottom: 10.0,
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 26.0,
-                                            right: 10.0,
-                                            left: 10.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("5"),
+                                        child: AndroidButton1("4"),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 26.0,
+                                          right: 10.0,
+                                          left: 10.0,
+                                          bottom: 10.0,
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 26.0,
-                                            right: 10.0,
-                                            left: 11.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("6"),
+                                        child: AndroidButton1("5"),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 26.0,
+                                          right: 10.0,
+                                          left: 11.0,
+                                          bottom: 10.0,
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 26.0,
-                                            right: 10.0,
-                                            left: 10.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("-"),
+                                        child: AndroidButton1("6"),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 26.0,
+                                          right: 10.0,
+                                          left: 10.0,
+                                          bottom: 10.0,
                                         ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 26.0,
-                                            right: 10.0,
-                                            left: 29.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("1"),
+                                        child: AndroidButton1("-"),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 26.0,
+                                          right: 10.0,
+                                          left: 20.0,
+                                          bottom: 10.0,
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 26.0,
-                                            right: 10.0,
-                                            left: 10.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("2"),
+                                        child: AndroidButton1("1"),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 26.0,
+                                          right: 10.0,
+                                          left: 10.0,
+                                          bottom: 10.0,
                                         ),
-                                      ],
+                                        child: AndroidButton1("2"),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 26.0,
+                                      right: 10.0,
+                                      left: 11.0,
+                                      bottom: 10.0,
                                     ),
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 26.0,
-                                            right: 10.0,
-                                            left: 11.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("3"),
+                                    child: AndroidButton1("3"),
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 26.0,
+                                          right: 10.0,
+                                          left: 10.0,
+                                          bottom: 10.0,
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 26.0,
-                                            right: 10.0,
-                                            left: 10.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("*"),
+                                        child: AndroidButton1("*"),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 26.0,
+                                          right: 10.0,
+                                          left: 20.0,
+                                          bottom: 10.0,
                                         ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 26.0,
-                                            right: 10.0,
-                                            left: 29.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("."),
+                                        child: AndroidButton1("."),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 26.0,
+                                          right: 10.0,
+                                          left: 10.0,
+                                          bottom: 10.0,
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 26.0,
-                                            right: 10.0,
-                                            left: 10.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("0"),
+                                        child: AndroidButton1("0"),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 26.0,
+                                          right: 10.0,
+                                          left: 11.0,
+                                          bottom: 10.0,
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 26.0,
-                                            right: 10.0,
-                                            left: 11.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("="),
+                                        child: AndroidButton1("="),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 26.0,
+                                          right: 10.0,
+                                          left: 10.0,
+                                          bottom: 10.0,
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 26.0,
-                                            right: 10.0,
-                                            left: 10.0,
-                                            bottom: 10.0,
-                                          ),
-                                          child: AndroidButton1("/"),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                        child: AndroidButton1("/"),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   // ),
@@ -432,11 +444,16 @@ class AndroidButton1 extends StatelessWidget {
     //   height: 59.0,
     //   child: LayoutBuilder(
     //     builder: (BuildContext context, BoxConstraints constraints) {
-    return ButtonTheme(
-      buttonColor: _ColorCatalog.instance.color_1,
-      minWidth: 68.0 / widthpixels * 1080 / 1.45,
-      height: 59.0 / heightpixels * 2160 / 1.35,
-      child: RaisedButton(
+    return Container(
+      // buttonColor: _ColorCatalog.instance.color_1,
+      width: 75.0 / widthpixels * 1080 / 1.45,
+      height: 65.0 / heightpixels * 2160 / 1.35,
+      child: NeuButton(
+        decoration: NeumorphicDecoration(
+          color: mainTheme,
+          borderRadius: BorderRadius.circular(20)
+        ),
+        child: Text(inputText,  style: TextStyle(fontFamily: 'IBM Plex Sans', fontSize: 25, color: lightMode ? lightModeText : darkModeText)),
         onPressed: () {
           if (inputText == "=") {
             String b = txt.text;
