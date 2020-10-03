@@ -6,29 +6,20 @@ A new Flutter project.
 
 This is a Calculator app made entirely in Flutter. 
 It can be used for basic calculations, and supports light/dark Themes.
-It is based on Material Design and uses url_launcher and expression_language as it's dependencies.
+It is based on Neumorphic Design and uses url_launcher and expression_language as it's dependencies.
 
-## Old Screenshots
+## Screenshots
 
-- ![Starting Page](examples/Screenshot_1584806141.png)
+<img src="examples/screenshot1.png" width="250" alt="Light Theme">         <img src="examples/screenshot2.png" width="250" alt="Dark Theme">
 
-- ![Drawer Tab](examples/Screenshot_1584806147.png)
+## Old Screenshots (showing functionality)
 
-- ![Dark Theme](examples/Screenshot_1584806153.png)
+<img src="examples/Screenshot_1584806147.png" width="250" alt="Drawer Tab">
 
-- ![Sample1](examples/Screenshot_1584806162.png)
+<img src="examples/Screenshot_1584806162.png" width="250" alt="Sample1">         <img src="examples/Screenshot_1584806165.png" width="250" alt="Answer1">
 
-- ![Answer1](examples/Screenshot_1584806165.png)
+<img src="examples/Screenshot_1584806199.png" width="250" alt="Sample2">         <img src="examples/Screenshot_1584806201.png" width="250" alt="Answer2">
 
-- ![Sample2](examples/Screenshot_1584806199.png)
-
-- ![Answer2](examples/Screenshot_1584806201.png)
-
-## New Screenshots
-
-- ![Light Theme](examples/screenshot1.png)
-
-- ![Dark Theme](examples/screenshot2.png)
 
 ## Usage
 
